@@ -25,6 +25,7 @@ namespace SnailRace.UI
 
 		public void PlayGame()
 		{
+			Console.CursorVisible = false;
 			splashScreen.Intro();
 			while (game.Player.Money > 0)
 			{

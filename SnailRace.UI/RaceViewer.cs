@@ -58,37 +58,39 @@ namespace SnailRace.UI
 		{			
 			lock (this.drawTrackLock)
 			{
-				Console.Clear();
-				Console.SetCursorPosition(0, this.topMargin);
+				StringBuilder buffer = new StringBuilder();
+			
 				int iteration = 0;
-
 				foreach (var position in race.Positions)
 				{
 					if (iteration < this.startLine.Length)
 					{
-						Console.Write(this.leftMargin + this.startLine[iteration]);
+						buffer.Append(this.leftMargin + this.startLine[iteration]);
 					}
 					else
 					{
-						Console.Write(this.leftMargin + " ");
+						buffer.Append(this.leftMargin + " ");
 					}
-					Console.Write("|");
-					Console.Write(drawSnail(position.Value, turn, race.Length));
-					Console.Write("|");
+					buffer.Append("|");
+					buffer.Append(drawSnail(position.Value, turn, race.Length));
+					buffer.Append("|");
 					if (iteration >= 0 && iteration < this.finishLine.Length)
 					{
-						Console.Write(this.finishLine[iteration]);
+						buffer.Append(this.finishLine[iteration]);
 					}
 					else
 					{
-						Console.Write(" ");
+						buffer.Append(" ");
 					}
-					Console.WriteLine("  " + position.Key.Name);
+					buffer.Append("  " + position.Key.Name + "\n");
 
 					iteration++;
 				}
-				
-				Console.Write("\n\n" + this.leftMargin + message);
+				buffer.Append("\n\n" + this.leftMargin + message);
+
+				Console.Clear();
+				Console.SetCursorPosition(0, this.topMargin);
+				Console.Write(buffer);
 			}
 		}
 

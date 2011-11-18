@@ -34,7 +34,7 @@ namespace SnailRace.UI
 			Console.WriteLine(this.leftMargin + "CONGRATULATIONS!");
 			Console.WriteLine(this.leftMargin + "You won ${0}.", winnings);
 
-			Console.ReadKey(true);
+			this.waitForKey();
 		}
 
 		private void loser()
@@ -43,6 +43,12 @@ namespace SnailRace.UI
 			Console.WriteLine("\n");
 			Console.WriteLine(this.leftMargin + "Sorry, you didn't win anything.");
 
+			this.waitForKey();
+		}
+
+		private void waitForKey()
+		{
+			Console.WriteLine("\n" + this.leftMargin + "(press any key to continue...)");
 			Console.ReadKey(true);
 		}
 	}

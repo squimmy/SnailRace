@@ -20,7 +20,7 @@ namespace SnailRace.UI
 		{
 			ISnail pickToWin = chooseSnail(race);
 			int betAmount = getBetAmount(pickToWin, race.Player.Money);
-
+			
 			return createBet(pickToWin, betAmount);
 		}
 
@@ -29,7 +29,7 @@ namespace SnailRace.UI
 			int selection = 0;
 
 			this.printSnailChoices(race, null);
-			
+			Console.CursorVisible = true;
 			int.TryParse(Console.ReadLine(), out selection);
 
 			while (selection <= 0 || selection > race.Snails.Count())
@@ -37,6 +37,7 @@ namespace SnailRace.UI
 				this.printSnailChoices(race, string.Format("You must enter a number from 1 to {0}.\n", race.Snails.Count()));
 				int.TryParse(Console.ReadLine(), out selection);
 			}
+			Console.CursorVisible = false;
 
 			return race.Snails.ElementAt(selection - 1);
 		}
@@ -65,6 +66,8 @@ namespace SnailRace.UI
 			bool inputValid = false;
 
 			this.printBetPrompt(pickToWin, money, null);
+
+			Console.CursorVisible = true;
 			inputValid = int.TryParse(Console.ReadLine(), out wager);
 
 			while (wager <=0 || wager > money)
@@ -83,6 +86,7 @@ namespace SnailRace.UI
 				}
 				inputValid = int.TryParse(Console.ReadLine(), out wager);
 			}
+			Console.CursorVisible = false;
 
 			return wager;
 		}
