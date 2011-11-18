@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1">
+  <asmv1:assemblyIdentity name="SnailRace.exe" version="1.0.0.3" publicKeyToken="237a096623eb880d" language="neutral" processorArchitecture="x86" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="SnailRace" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+    <commandLine file="SnailRace.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SnailRace.exe" size="10752">
+      <assemblyIdentity name="SnailRace" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>GfxCEonj9nofR0/6J+Jx4T3mLb4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+<publisherIdentity name="CN=Interdictor\Tim" issuerKeyHash="1fec65a24d1b7337d49c95c76dd106c1322b579d" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>lptmakHA9U8k6zCj1mDFKowoyP0=</DigestValue></Reference></SignedInfo><SignatureValue>S012sKB1y4xvLztuugarn7iYvU4zZGxIgUboB5VHvkt5k+ROtnenlx6YIuRteIYubyl5wqPJcU5YRwb8sSaen23ql30Fnc++NHuo83Fdoud3YKJWdvgT99Jd7vwwxMJO8zPOzwhaxad1IBLxAghRCA0NCe9rE5o8ZtW5JTztCVI=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>kB/AQjSj2wHNkUBZ+Oa3NnulVKwnY5KO3EFjJlQevp54PxhhhSNm9GgToP3I5Kvd1ffwWDf5Q2jNyJ2yVfIjvMW103w1PHe6FlLXdlx+dayOOhvmRq1DsKya5JAFptJad2oqcqkZ/64sLy0lf/7UTXXLO90V7tkztD/mkWqJepM=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="fdc8288c2ac560d6a330eb244ff5c0416a669b96" Description="" Url=""><as:assemblyIdentity name="SnailRace.exe" version="1.0.0.3" publicKeyToken="237a096623eb880d" language="neutral" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=Interdictor\Tim</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>NPIx07VXcp3Z5tgXYyxrU03ouqE=</DigestValue></Reference></SignedInfo><SignatureValue>P6YtUqzoQtF9kLM0r/UcQAQhbDxmY7gmzBK87ylZsOuknIb8F3at0ixr/NMa8sTzPSDevQeydV8edxEc8IRG39wzpVPzWHqc+99MZla2vm8OY+V4Gy66itSNIUyv64TbHRgj+IW8VUzwAIybkLPv1MX8o3RimUuXuRzKdPrJIzM=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>kB/AQjSj2wHNkUBZ+Oa3NnulVKwnY5KO3EFjJlQevp54PxhhhSNm9GgToP3I5Kvd1ffwWDf5Q2jNyJ2yVfIjvMW103w1PHe6FlLXdlx+dayOOhvmRq1DsKya5JAFptJad2oqcqkZ/64sLy0lf/7UTXXLO90V7tkztD/mkWqJepM=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB1TCCAT6gAwIBAgIQNe/QXSzFcZNM/i/G0O1Q9jANBgkqhkiG9w0BAQUFADApMScwJQYDVQQDHh4ASQBuAHQAZQByAGQAaQBjAHQAbwByAFwAVABpAG0wHhcNMTExMDE4MTQxODQyWhcNMTIxMDE3MjAxODQyWjApMScwJQYDVQQDHh4ASQBuAHQAZQByAGQAaQBjAHQAbwByAFwAVABpAG0wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAJAfwEI0o9sBzZFAWfjmtzZ7pVSsJ2OSjtxBYyZUHr6eeD8YYYUjZvRoE6D9yOSr3dX38Fg3+UNozcidslXyI7zFtdN8NTx3uhZS13ZcfnWsjjob5katQ7CsmuSQBabSWndqKnKpGf+uLC8tJX/+1E11yzvdFe7ZM7Q/5pFqiXqTAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEARm9hDCi1EIUcKP3qB0cMDWKRdtnphvaXUwyG1DccTlOXM+rKZrXU8XVsww8cpKUVr+I0cIYddpa/gA1KUKBn9fnJQCWQsksXI3cjCyR7aXjaK8WSR3iA59Z8b9rtVwFVa9lU9fKO4kzRZgqn0ew0MJfIbkMYnI9yqp5JKFnNnfk=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
