@@ -28,12 +28,12 @@ namespace SnailRace.UI
 		private string topMargin;
 		private string leftMargin;
 		private int speed;
-		private DelegateCreateOutputMethod newOutput;
+		private DelegateCreateOutputMethod createView;
 
-		public RaceViewer(int speed, DelegateCreateOutputMethod newOutput)
+		public RaceViewer(int speed, DelegateCreateOutputMethod createView)
 		{
 			this.speed = speed;
-			this.newOutput = newOutput;
+			this.createView = createView;
 
 			this.startLine  = new string[] { "S", "T", "A", "R", "T" };
 			this.finishLine = new string[] { " ", "E", "N", "D" };
@@ -74,36 +74,36 @@ namespace SnailRace.UI
 		{			
 			lock (this.drawTrackLock)
 			{
-				using (IOutputMethod output = newOutput())
+				using (IOutputMethod view = createView())
 				{
-					output.OutputText(this.topMargin);
+					view.Write(this.topMargin);
 					int iteration = 0;
 					foreach (var position in race.Positions)
 					{
 						if (iteration < this.startLine.Length)
 						{
-							output.OutputText(this.leftMargin + this.startLine[iteration]);
+							view.Write(this.leftMargin + this.startLine[iteration]);
 						}
 						else
 						{
-							output.OutputText(this.leftMargin + " ");
+							view.Write(this.leftMargin + " ");
 						}
-						output.OutputText("|");
-						output.OutputText(drawSnail(position.Value, turn, race.Length));
-						output.OutputText("|");
+						view.Write("|");
+						view.Write(drawSnail(position.Value, turn, race.Length));
+						view.Write("|");
 						if (iteration >= 0 && iteration < this.finishLine.Length)
 						{
-							output.OutputText(this.finishLine[iteration]);
+							view.Write(this.finishLine[iteration]);
 						}
 						else
 						{
-							output.OutputText(" ");
+							view.Write(" ");
 						}
-						output.OutputText("  " + position.Key.Name + "\n");
+						view.Write("  " + position.Key.Name + "\n");
 
 						iteration++;
 					}
-					output.OutputText("\n\n" + this.leftMargin + message);
+					view.Write("\n\n" + this.leftMargin + message);
 				}
 			}
 		}

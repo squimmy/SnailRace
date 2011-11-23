@@ -21,12 +21,12 @@ namespace SnailRace.UI
 	{
 		private DelegateCreateBet createBet;
 		private string leftMargin;
-		DelegateCreateOutputMethod newOutput;
+		DelegateCreateOutputMethod createView;
 
-		public BookieInput(DelegateCreateBet createBet, DelegateCreateOutputMethod output)
+		public BookieInput(DelegateCreateBet createBet, DelegateCreateOutputMethod createView)
 		{
 			this.createBet  = createBet;
-			this.newOutput = output;
+			this.createView = createView;
 			this.leftMargin = "          ";
 		}
 
@@ -58,21 +58,23 @@ namespace SnailRace.UI
 
 		private void printSnailChoices(IRaceLineup race, string additionalText)
 		{
-			using (IOutputMethod output = newOutput())
+			using (IOutputMethod view = createView())
 			{
-				output.OutputText("\n\n");
-				output.OutputText(this.leftMargin + "Please choose one of the following snails:\n\n");
-				output.OutputText(this.leftMargin + "Name:               Number:\n\n");
-				for (int i = 0; i < race.Snails.Count(); i++)
+				view.Write("\n\n");
+				view.Write(this.leftMargin + "Please choose one of the following snails:\n\n");
+				view.Write(this.leftMargin + "Name:               Number:\n\n");
+				int i = 0;
+				foreach (var snail in race.Snails)
 				{
-					output.OutputText(this.leftMargin + string.Format("{0, -20}{1}\n", race.Snails.ElementAt(i).Name, i + 1));
+					i++;
+					view.Write(this.leftMargin + "{0, -20}{1}\n", snail.Name, i);
 				}
-				output.OutputText("\n");
+				view.Write("\n");
 				if (additionalText != null)
 				{
-					output.OutputText(this.leftMargin + additionalText + "\n");
+					view.Write(this.leftMargin + additionalText + "\n");
 				}
-				output.OutputText(this.leftMargin + "Which snail would you like to bet on? ");
+				view.Write(this.leftMargin + "Which snail would you like to bet on? ");
 			}
 		}
 
@@ -109,15 +111,15 @@ namespace SnailRace.UI
 
 		private void printBetPrompt(ISnail pickToWin, int money, string additionalText)
 		{
-			using (IOutputMethod output = newOutput())
+			using (IOutputMethod view = createView())
 			{
-				output.OutputText("\n\n");
+				view.Write("\n\n");
 				if (additionalText != null)
 				{
-					output.OutputText(this.leftMargin + additionalText + "\n");
+					view.Write(this.leftMargin + additionalText + "\n");
 				}
-				output.OutputText(this.leftMargin + string.Format("You have ${0}.\n\n", money));
-				output.OutputText(this.leftMargin + string.Format("How many dollars would you like to bet on {0}? ", pickToWin.Name));
+				view.Write(this.leftMargin + "You have ${0}.\n\n", money);
+				view.Write(this.leftMargin + "How many dollars would you like to bet on {0}? ", pickToWin.Name);
 			}
 			
 		}

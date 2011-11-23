@@ -19,11 +19,11 @@ namespace SnailRace.UI
 	class PayoutDisplay : IPayoutDisplay
 	{
 		private string leftMargin;
-		private DelegateCreateOutputMethod newOutput;
+		private DelegateCreateOutputMethod createView;
 
-		public PayoutDisplay(DelegateCreateOutputMethod newOutput)
+		public PayoutDisplay(DelegateCreateOutputMethod createView)
 		{
-			this.newOutput = newOutput;
+			this.createView = createView;
 			this.leftMargin = "          ";
 		}
 
@@ -42,23 +42,23 @@ namespace SnailRace.UI
 
 		private void winner(int winnings)
 		{
-			using (IOutputMethod output = newOutput())
+			using (IOutputMethod view = createView())
 			{
-				output.OutputText("\n\n");
-				output.OutputText(this.leftMargin + "CONGRATULATIONS!\n");
-				output.OutputText(this.leftMargin + string.Format("You won ${0}.\n\n", winnings));
-				output.OutputText(this.leftMargin + "(press any key to continue...)");
+				view.Write("\n\n");
+				view.Write(this.leftMargin + "CONGRATULATIONS!\n");
+				view.Write(this.leftMargin + "You won ${0}.\n\n", winnings);
+				view.Write(this.leftMargin + "(press any key to continue...)");
 			}
 			Console.ReadKey(true);
 		}
 
 		private void loser()
 		{
-			using (IOutputMethod output = newOutput())
+			using (IOutputMethod view = createView())
 			{
-				output.OutputText("\n\n");
-				output.OutputText(this.leftMargin + "Sorry, you didn't win anything.\n\n");
-				output.OutputText(this.leftMargin + "(press any key to continue...)");
+				view.Write("\n\n");
+				view.Write(this.leftMargin + "Sorry, you didn't win anything.\n\n");
+				view.Write(this.leftMargin + "(press any key to continue...)");
 			}
 			Console.ReadKey(true);
 		}

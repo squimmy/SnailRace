@@ -26,9 +26,13 @@ namespace SnailRace.UI
 			Console.Clear();
 		}
 
-		public void OutputText(string text)
+		public void Write(string value)
 		{
-			Console.Write(text);
+			Console.Write(value);
+		}
+		public void Write(string format, params object[] arg)
+		{
+			Console.Write(format, arg);
 		}
 
 		public void Dispose() { }

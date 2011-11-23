@@ -13,6 +13,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 using System;
+using System.Collections.Generic;
 
 namespace SnailRace.UI
 {
@@ -20,11 +21,11 @@ namespace SnailRace.UI
 	{
 		private string[] intro;
 		private string[] gameOver;
-		private DelegateCreateOutputMethod newOutput;
+		private DelegateCreateOutputMethod createView;
 
-		public SplashScreen(DelegateCreateOutputMethod newOutput)
+		public SplashScreen(DelegateCreateOutputMethod createView)
 		{
-			this.newOutput = newOutput;
+			this.createView = createView;
 
 			intro = new string[]
 			{
@@ -39,15 +40,15 @@ namespace SnailRace.UI
 
 			gameOver = new string[]
 			{
-				"\n\n                 ____                         ___\n",
-				"                / ___| __ _ _ __ ___   ___   / _ \\__   _____ _ __\n",
-				"               | |  _ / _` | '_ ` _ \\ / _ \\ | | | \\ \\ / / _ \\ '__|\n",
-				"               | |_| | (_| | | | | | |  __/ | |_| |\\ V /  __/ |\n",
-				"                \\____|\\__,_|_| |_| |_|\\___|  \\___/  \\_/ \\___|_|\n",
+				"\n\n                ____                         ___\n",
+				"               / ___| __ _ _ __ ___   ___   / _ \\__   _____ _ __\n",
+				"              | |  _ / _` | '_ ` _ \\ / _ \\ | | | \\ \\ / / _ \\ '__|\n",
+				"              | |_| | (_| | | | | | |  __/ | |_| |\\ V /  __/ |\n",
+				"               \\____|\\__,_|_| |_| |_|\\___|  \\___/  \\_/ \\___|_|\n",
 				"\n\n",
-				"                           Sorry, you ran out of money!\n",
+				"                          Sorry, you ran out of money!\n",
 				"\n",
-				"                              (Press any key to exit)"
+				"                             (Press any key to exit)"
 			};
 		}
 
@@ -61,13 +62,13 @@ namespace SnailRace.UI
 			printMessage(this.gameOver);
 		}
 
-		private void printMessage(string[] message)
+		private void printMessage(IEnumerable<string> message)
 		{
-			using (IOutputMethod output = newOutput())
+			using (IOutputMethod view = createView())
 			{
-				for (int i = 0; i < message.Length; i++)
+				foreach (var text in message)
 				{
-					output.OutputText(message[i]);
+					view.Write(text);
 				}
 			}
 			Console.ReadKey(true);

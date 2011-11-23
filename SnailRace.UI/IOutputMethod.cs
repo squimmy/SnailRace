@@ -20,6 +20,7 @@ namespace SnailRace.UI
 
 	public interface IOutputMethod : IDisposable
 	{
-		void OutputText(string text);
+		void Write(string value);
+		void Write(string format, params object[] arg);
 	}
 }

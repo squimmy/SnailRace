@@ -25,9 +25,13 @@ namespace SnailRace.UI
 			buffer = new StringBuilder();
 		}
 
-		public void OutputText(string text)
+		public void Write(string text)
 		{
 			buffer.Append(text);
+		}
+		public void Write(string format, params object[] arg)
+		{
+			buffer.Append(string.Format(format, arg));
 		}
 
 		public void Dispose()
