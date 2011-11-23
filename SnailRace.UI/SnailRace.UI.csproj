@@ -44,12 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookieInput.cs" />
+    <Compile Include="BufferedConsoleOutput.cs" />
+    <Compile Include="CreateBufferedConsoleOutput.cs" />
+    <Compile Include="CreateConsoleOutput.cs" />
     <Compile Include="GameUI.cs" />
     <Compile Include="IBookieInput.cs" />
     <Compile Include="IGameUI.cs" />
+    <Compile Include="IOutputMethod.cs" />
     <Compile Include="IRaceViewer.cs" />
     <Compile Include="IPayoutDisplay.cs" />
     <Compile Include="ISplashScreen.cs" />
+    <Compile Include="ConsoleOutput.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BootStrapper.cs" />

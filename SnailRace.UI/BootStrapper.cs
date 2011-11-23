@@ -38,11 +38,13 @@ namespace SnailRace.UI
 				),
 				bookie
 			);
+			DelegateCreateOutputMethod standardOutput = CreateConsoleOutput.DelegateCreateConsoleOutput();
+			DelegateCreateOutputMethod bufferedOutput = CreateBufferedConsoleOutput.DelegateCreateBufferedConsoleOutput();
 
-			ISplashScreen splashScreen   = new SplashScreen();
-			IRaceViewer raceViewer       = new RaceViewer(100);
-			IBookieInput bookieInput     = new BookieInput(CreateBet.DelegateCreateBet());
-			IPayoutDisplay payoutDisplay = new PayoutDisplay();
+			ISplashScreen splashScreen   = new SplashScreen(standardOutput);
+			IRaceViewer raceViewer       = new RaceViewer(100, bufferedOutput);
+			IBookieInput bookieInput     = new BookieInput(CreateBet.DelegateCreateBet(), standardOutput);
+			IPayoutDisplay payoutDisplay = new PayoutDisplay(standardOutput);
 
 			return new GameUI(
 				game,

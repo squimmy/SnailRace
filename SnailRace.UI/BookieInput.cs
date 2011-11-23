@@ -21,10 +21,12 @@ namespace SnailRace.UI
 	{
 		private DelegateCreateBet createBet;
 		private string leftMargin;
+		DelegateCreateOutputMethod newOutput;
 
-		public BookieInput(DelegateCreateBet createBet)
+		public BookieInput(DelegateCreateBet createBet, DelegateCreateOutputMethod output)
 		{
 			this.createBet  = createBet;
+			this.newOutput = output;
 			this.leftMargin = "          ";
 		}
 
@@ -56,20 +58,22 @@ namespace SnailRace.UI
 
 		private void printSnailChoices(IRaceLineup race, string additionalText)
 		{
-			Console.Clear();
-			Console.WriteLine("\n");
-			Console.WriteLine(this.leftMargin + "Please choose one of the following snails:\n");
-			Console.WriteLine(this.leftMargin + "Name:               Number:\n");
-			for (int i = 0; i < race.Snails.Count(); i++)
+			using (IOutputMethod output = newOutput())
 			{
-				Console.WriteLine(this.leftMargin + string.Format("{0, -20}{1}", race.Snails.ElementAt(i).Name, i + 1));
+				output.OutputText("\n\n");
+				output.OutputText(this.leftMargin + "Please choose one of the following snails:\n\n");
+				output.OutputText(this.leftMargin + "Name:               Number:\n\n");
+				for (int i = 0; i < race.Snails.Count(); i++)
+				{
+					output.OutputText(this.leftMargin + string.Format("{0, -20}{1}\n", race.Snails.ElementAt(i).Name, i + 1));
+				}
+				output.OutputText("\n");
+				if (additionalText != null)
+				{
+					output.OutputText(this.leftMargin + additionalText + "\n");
+				}
+				output.OutputText(this.leftMargin + "Which snail would you like to bet on? ");
 			}
-			Console.Write("\n");
-			if (additionalText != null)
-			{
-				Console.WriteLine(this.leftMargin + additionalText);	
-			}
-			Console.Write(this.leftMargin + "Which snail would you like to bet on? ");
 		}
 
 		private int getBetAmount(ISnail pickToWin, int money)
@@ -105,14 +109,17 @@ namespace SnailRace.UI
 
 		private void printBetPrompt(ISnail pickToWin, int money, string additionalText)
 		{
-			Console.Clear();
-			Console.WriteLine("\n");
-			if (additionalText != null)
+			using (IOutputMethod output = newOutput())
 			{
-				Console.WriteLine(this.leftMargin + additionalText);
+				output.OutputText("\n\n");
+				if (additionalText != null)
+				{
+					output.OutputText(this.leftMargin + additionalText + "\n");
+				}
+				output.OutputText(this.leftMargin + string.Format("You have ${0}.\n\n", money));
+				output.OutputText(this.leftMargin + string.Format("How many dollars would you like to bet on {0}? ", pickToWin.Name));
 			}
-			Console.WriteLine(this.leftMargin + "You have ${0}.\n", money);
-			Console.Write(this.leftMargin + "How many dollars would you like to bet on {0}? ", pickToWin.Name);
+			
 		}
 	}
 }

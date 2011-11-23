@@ -19,9 +19,11 @@ namespace SnailRace.UI
 	class PayoutDisplay : IPayoutDisplay
 	{
 		private string leftMargin;
+		private DelegateCreateOutputMethod newOutput;
 
-		public PayoutDisplay()
+		public PayoutDisplay(DelegateCreateOutputMethod newOutput)
 		{
+			this.newOutput = newOutput;
 			this.leftMargin = "          ";
 		}
 
@@ -40,26 +42,24 @@ namespace SnailRace.UI
 
 		private void winner(int winnings)
 		{
-			Console.Clear();
-			Console.WriteLine("\n");
-			Console.WriteLine(this.leftMargin + "CONGRATULATIONS!");
-			Console.WriteLine(this.leftMargin + "You won ${0}.", winnings);
-
-			this.waitForKey();
+			using (IOutputMethod output = newOutput())
+			{
+				output.OutputText("\n\n");
+				output.OutputText(this.leftMargin + "CONGRATULATIONS!\n");
+				output.OutputText(this.leftMargin + string.Format("You won ${0}.\n\n", winnings));
+				output.OutputText(this.leftMargin + "(press any key to continue...)");
+			}
+			Console.ReadKey(true);
 		}
 
 		private void loser()
 		{
-			Console.Clear();
-			Console.WriteLine("\n");
-			Console.WriteLine(this.leftMargin + "Sorry, you didn't win anything.");
-
-			this.waitForKey();
-		}
-
-		private void waitForKey()
-		{
-			Console.WriteLine("\n" + this.leftMargin + "(press any key to continue...)");
+			using (IOutputMethod output = newOutput())
+			{
+				output.OutputText("\n\n");
+				output.OutputText(this.leftMargin + "Sorry, you didn't win anything.\n\n");
+				output.OutputText(this.leftMargin + "(press any key to continue...)");
+			}
 			Console.ReadKey(true);
 		}
 	}

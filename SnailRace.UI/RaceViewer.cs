@@ -25,17 +25,19 @@ namespace SnailRace.UI
 		private object drawTrackLock;
 		private string[] startLine;
 		private string[] finishLine;
-		private int topMargin;
+		private string topMargin;
 		private string leftMargin;
 		private int speed;
+		private DelegateCreateOutputMethod newOutput;
 
-		public RaceViewer(int speed)
+		public RaceViewer(int speed, DelegateCreateOutputMethod newOutput)
 		{
 			this.speed = speed;
+			this.newOutput = newOutput;
 
 			this.startLine  = new string[] { "S", "T", "A", "R", "T" };
 			this.finishLine = new string[] { " ", "E", "N", "D" };
-			this.topMargin  = 4;
+			this.topMargin  = "\n\n\n\n";
 			this.leftMargin = "          ";
 
 			this.drawTrackLock = new object();
@@ -72,39 +74,37 @@ namespace SnailRace.UI
 		{			
 			lock (this.drawTrackLock)
 			{
-				StringBuilder buffer = new StringBuilder();
-			
-				int iteration = 0;
-				foreach (var position in race.Positions)
+				using (IOutputMethod output = newOutput())
 				{
-					if (iteration < this.startLine.Length)
+					output.OutputText(this.topMargin);
+					int iteration = 0;
+					foreach (var position in race.Positions)
 					{
-						buffer.Append(this.leftMargin + this.startLine[iteration]);
-					}
-					else
-					{
-						buffer.Append(this.leftMargin + " ");
-					}
-					buffer.Append("|");
-					buffer.Append(drawSnail(position.Value, turn, race.Length));
-					buffer.Append("|");
-					if (iteration >= 0 && iteration < this.finishLine.Length)
-					{
-						buffer.Append(this.finishLine[iteration]);
-					}
-					else
-					{
-						buffer.Append(" ");
-					}
-					buffer.Append("  " + position.Key.Name + "\n");
+						if (iteration < this.startLine.Length)
+						{
+							output.OutputText(this.leftMargin + this.startLine[iteration]);
+						}
+						else
+						{
+							output.OutputText(this.leftMargin + " ");
+						}
+						output.OutputText("|");
+						output.OutputText(drawSnail(position.Value, turn, race.Length));
+						output.OutputText("|");
+						if (iteration >= 0 && iteration < this.finishLine.Length)
+						{
+							output.OutputText(this.finishLine[iteration]);
+						}
+						else
+						{
+							output.OutputText(" ");
+						}
+						output.OutputText("  " + position.Key.Name + "\n");
 
-					iteration++;
+						iteration++;
+					}
+					output.OutputText("\n\n" + this.leftMargin + message);
 				}
-				buffer.Append("\n\n" + this.leftMargin + message);
-
-				Console.Clear();
-				Console.SetCursorPosition(0, this.topMargin);
-				Console.Write(buffer);
 			}
 		}
 
