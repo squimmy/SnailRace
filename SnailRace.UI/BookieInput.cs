@@ -63,11 +63,11 @@ namespace SnailRace.UI
 				view.Write("\n\n");
 				view.Write(this.leftMargin + "Please choose one of the following snails:\n\n");
 				view.Write(this.leftMargin + "Name:               Number:\n\n");
-				int i = 0;
+				int snailNumber = 1;
 				foreach (var snail in race.Snails)
 				{
-					i++;
-					view.Write(this.leftMargin + "{0, -20}{1}\n", snail.Name, i);
+					view.Write(this.leftMargin + "{0, -20}{1}\n", snail.Name, snailNumber);
+					snailNumber++;
 				}
 				view.Write("\n");
 				if (additionalText != null)
